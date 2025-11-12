@@ -2,7 +2,7 @@
 package proyecto.de.poo115.modelos;
 
 
-public class Vehiculos {
+public class Vehiculo {
     private String id;
     private String marca;
     private String modelo;
@@ -11,9 +11,9 @@ public class Vehiculos {
     private double precioDia;
     private boolean disponible;
 
-    public Vehiculos(){}
+    public Vehiculo(){}
 
-    public Vehiculos(String marca, String modelo, int anio, String tipo, double precioDia, boolean disponible) {
+    public Vehiculo(String marca, String modelo, int anio, String tipo, double precioDia, boolean disponible) {
         this.marca = marca;
         this.modelo = modelo;
         this.anio = anio;

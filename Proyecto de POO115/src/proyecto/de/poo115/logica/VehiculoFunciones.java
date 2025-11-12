@@ -1,25 +1,25 @@
 
 package proyecto.de.poo115.logica;
-import proyecto.de.poo115.conección.dao.VehiculosConeccionDAO;
-import proyecto.de.poo115.modelos.Vehiculos;
+import proyecto.de.poo115.conección.dao.VehiculoDAO;
+import proyecto.de.poo115.modelos.Vehiculo;
 import java.util.List;
 
 
-public class VehiculosFunciones {
-    private final VehiculosConeccionDAO dao;
+public class VehiculoFunciones {
+    private final VehiculoDAO dao;
 
-    public VehiculosFunciones(VehiculosConeccionDAO dao) {
+    public VehiculoFunciones(VehiculoDAO dao) {
         this.dao = dao;
     }
 
-    public void registrarVehiculo(Vehiculos v) {
+    public void registrarVehiculo(Vehiculo v) {
         if (v.getMarca().isEmpty() || v.getModelo().isEmpty()) {
             throw new IllegalArgumentException("Marca y modelo son obligatorios");
         }
         dao.insertar(v);
     }
 
-    public List<Vehiculos> obtenerTodos() {
+    public List<Vehiculo> obtenerTodos() {
         return dao.listar();
     }
 
@@ -27,7 +27,7 @@ public class VehiculosFunciones {
         dao.eliminar(id);
     }
 
-    public void actualizarVehiculo(Vehiculos v) {
+    public void actualizarVehiculo(Vehiculo v) {
         dao.actualizar(v);
     }
     
