@@ -1,6 +1,5 @@
-package proyecto.de.poo115;
+package proyecto.de.poo115.modelos;
 
-// Estas son las "herramientas" que importamos del driver que bajaste
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoDatabase;
@@ -18,17 +17,15 @@ public class ConexionMongoDB {
     private MongoDatabase database;
 
     // 3. Constructor PRIVADO (esto es clave en Singleton)
-    // Nadie de fuera puede crear un new ConexionMongoDB()
     private ConexionMongoDB() {
         try {
-            // 4. La dirección de tu servidor local
+            // 4. La dirección de servidor local
             String connectionString = "mongodb://localhost:27017";
             
             // 5. Creamos el cliente de MongoDB
             this.mongoClient = MongoClients.create(connectionString);
             
             // 6. Obtenemos la base de datos. 
-            // ¡Si no existe, Mongo la crea solo cuando insertes el primer dato!
             this.database = mongoClient.getDatabase("AlquilerAutosDB");
             
             System.out.println("¡CONEXIÓN A MONGODB EXITOSA!");
@@ -50,13 +47,13 @@ public class ConexionMongoDB {
         return instancia;
     }
 
-    // 5. Método público para que el resto de tu equipo (los DAO) 
-    // puedan obtener la base de datos y trabajar.
+    // 5. Método público de coneccion DAO 
+    //obtener la base de datos y trabajar.
     public MongoDatabase getDatabase() {
         return database;
     }
 
-    // 6. (Opcional pero recomendado) Método para cerrar la conexión
+    // 6.Método para cerrar la conexión
     public void close() {
         try {
             if (mongoClient != null) {

@@ -1,5 +1,6 @@
 
-package proyecto.de.poo115;
+package proyecto.de.poo115.modelos;
+
 
 public class ProyectoDePOO115 {
 
