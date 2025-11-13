@@ -68,13 +68,13 @@ public class ClienteFunciones {
             throw new IllegalArgumentException("El correo es obligatorio y debe tener un formato válido");
         }
         
-        // 4. Validación de DUI (El Salvador)
+        // 4. Validación de DUI
         // No solo validamos el formato, sino que el número sea matemáticamente correcto.
         if (!esDuiValido(c.getIdentificacion())) {
             throw new IllegalArgumentException("El DUI no es válido. Debe tener el formato 00000000-0 y ser un número válido.");
         }
         
-        // 5. Validación de Teléfono (El Salvador)
+        // 5. Validación de Teléfono 
         // Asumimos que el teléfono es OPCIONAL.
         // Si no está en blanco, lo validamos.
         if (!esNuloOEnBlanco(c.getTelefono())) {
