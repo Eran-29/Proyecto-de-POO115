@@ -1,5 +1,5 @@
 package proyecto.de.poo115.ui;
-
+import javax.swing.JFrame;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
