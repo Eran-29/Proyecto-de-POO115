@@ -4,6 +4,7 @@ import proyecto.de.poo115.conección.dao.EmpleadoDAO;
 import proyecto.de.poo115.modelos.Empleado;
 import java.util.List;
 
+//clase para comprobar al usuario
 public class AutenticacionFunciones {
     
     private EmpleadoDAO empleadoDAO;
@@ -27,7 +28,7 @@ public class AutenticacionFunciones {
         try {
             int codigo = Integer.parseInt(codigoStr);
             
-            // Este método es ineficiente pero simple.
+            // método es ineficiente pero simple.
             // Trae a todos los empleados y busca en la lista.
             List<Empleado> todos = empleadoDAO.listar();
             
