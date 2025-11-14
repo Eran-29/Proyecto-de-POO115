@@ -1,4 +1,4 @@
-package proyecto.de.poo115.modelos;
+package proyecto.de.poo115.conexion;
 
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;

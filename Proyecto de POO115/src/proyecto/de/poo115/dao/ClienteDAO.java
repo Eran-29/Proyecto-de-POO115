@@ -1,7 +1,7 @@
-package proyecto.de.poo115.conección.dao;
+package proyecto.de.poo115.dao;
 
 //importamos 
-import proyecto.de.poo115.modelos.ConexionMongoDB;
+import proyecto.de.poo115.conexion.ConexionMongoDB;
 import proyecto.de.poo115.modelos.Cliente; 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;

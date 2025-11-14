@@ -1,5 +1,7 @@
 
-package proyecto.de.poo115.modelos;
+package proyecto.de.poo115.main;
+
+import proyecto.de.poo115.conexion.ConexionMongoDB;
 
 
 public class ProyectoDePOO115 {

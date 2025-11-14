@@ -1,6 +1,6 @@
 package proyecto.de.poo115.logica;
 
-import proyecto.de.poo115.conección.dao.AlquilerDAO;
+import proyecto.de.poo115.dao.AlquilerDAO;
 import proyecto.de.poo115.modelos.Alquiler;
 import java.util.List;
 
@@ -66,5 +66,9 @@ public class AlquilerFunciones {
         // Se pueden re-usar las validaciones de Fechas/IDs
         registrarAlquiler(a);
         dao.actualizar(a);
+    }
+
+    public void finalizarAlquiler(String idAlquilerSeleccionado) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

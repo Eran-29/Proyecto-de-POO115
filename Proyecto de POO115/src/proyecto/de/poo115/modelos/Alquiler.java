@@ -1,5 +1,7 @@
 package proyecto.de.poo115.modelos;
 
+import java.util.Date;
+
 public class Alquiler {
     
     // 1. Campo para MongoDB
@@ -54,4 +56,20 @@ public class Alquiler {
 
     public double getTotalPagar() { return totalPagar; }
     public void setTotalPagar(double totalPagar) { this.totalPagar = totalPagar; }
+
+    public void setFechaInicio(Date fechaInicio) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setActivo(boolean b) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public boolean isActivo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

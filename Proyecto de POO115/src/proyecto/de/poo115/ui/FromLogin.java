@@ -1,7 +1,7 @@
 package proyecto.de.poo115.ui;
 
 // ... imports de Swing ...
-import proyecto.de.poo115.conección.dao.EmpleadoDAO;
+import proyecto.de.poo115.dao.EmpleadoDAO;
 import proyecto.de.poo115.logica.AutenticacionFunciones;
 import proyecto.de.poo115.modelos.Empleado;
 import javax.swing.JOptionPane;
@@ -13,8 +13,9 @@ public class FromLogin extends javax.swing.JFrame {
     private EmpleadoDAO empleadoDAO;
     private AutenticacionFunciones authLogica;
 
-    public FormLogin() {
+    public FromLogin() {
         initComponents();
+        this.setLocationRelativeTo(null); // Centrar
 
         // 2. Inicializamos los "cerebros"
         this.empleadoDAO = new EmpleadoDAO();
@@ -24,6 +25,7 @@ public class FromLogin extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +49,6 @@ public class FromLogin extends javax.swing.JFrame {
 
         jLabel3.setText("Apellido:");
 
-        txtCodigo.setText("codigo");
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtCodigoActionPerformed(evt);

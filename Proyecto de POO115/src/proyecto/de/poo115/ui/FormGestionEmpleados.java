@@ -1,20 +1,72 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package proyecto.de.poo115.ui;
 
-/**
- *
- * @author erick
- */
+import proyecto.de.poo115.dao.EmpleadoDAO; 
+import proyecto.de.poo115.logica.EmpleadoFunciones;
+import proyecto.de.poo115.modelos.Empleado; 
+
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class FormGestionEmpleados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormGestionEmpleados
-     */
+   private final EmpleadoDAO dao;
+   private final EmpleadoFunciones logica;
+    
+    // Variable para guardar el ID a editar/eliminar
+    private String idSeleccionado;
+    
     public FormGestionEmpleados() {
         initComponents();
+        
+       
+        this.setLocationRelativeTo(null); 
+        
+        
+         this.dao = new EmpleadoDAO();
+         this.logica = new EmpleadoFunciones(this.dao); // (Necesitarás crear EmpleadoFunciones)
+
+        //  Cargar datos iniciales
+         cargarTabla(); // Descomentar cuando la lógica esté lista
+        limpiarCampos();
+    }
+    private void cargarTabla() {
+        DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla.setRowCount(0);
+
+        // <<< 4. LLAMA A LA LÓGICA DE EMPLEADOS
+         List<Empleado> empleados = logica.obtenerTodos();
+        
+        // <<< 5. RECORRE LA LISTA DE EMPLEADOS
+         for (Empleado e : empleados) {
+            Object[] fila = {
+                e.getId(), // ID de Mongo
+                e.getCodigo(),
+                e.getNombre(),
+                e.getApellido(),
+                e.getCargo(),
+                e.getSalario()
+            };
+            modeloTabla.addRow(fila);
+        }
+        
+
+        // Ocultamos la columna del ID de Mongo
+        // Ocultamos la columna del ID de Mongo
+jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
+    }
+    
+    private void limpiarCampos() {
+        txtCod.setText("");
+        txtNom.setText("");
+        txtApel.setText("");
+        txtCar.setText("");
+        txtSala.setText("");
+        this.idSeleccionado = null;
     }
 
     /**
@@ -26,21 +78,305 @@ public class FormGestionEmpleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        txtCod = new javax.swing.JLabel();
+        txtNom = new javax.swing.JLabel();
+        txtApel = new javax.swing.JLabel();
+        txtCar = new javax.swing.JLabel();
+        txtSala = new javax.swing.JLabel();
+        txtCodigo = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtApellido = new javax.swing.JTextField();
+        txtCargo = new javax.swing.JTextField();
+        txtSalario = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        Limpiar = new javax.swing.JButton();
+        tblEmpleados = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos del Empleado"));
+
+        txtCod.setText("Codigo:");
+
+        txtNom.setText("Nombre:");
+
+        txtApel.setText("Apellido");
+
+        txtCar.setText("Cargo:");
+
+        txtSala.setText("Salario:");
+
+        txtCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodigoActionPerformed(evt);
+            }
+        });
+
+        txtSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSalarioActionPerformed(evt);
+            }
+        });
+
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCod)
+                            .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtSala, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtCar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtApel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnGuardar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEditar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Limpiar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCod)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtApel)
+                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCar)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSala, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnEditar)
+                    .addComponent(btnEliminar)
+                    .addComponent(Limpiar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tblEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmpleadosMouseClicked(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "MongoID", "Codigo", "Nombre", "Apellido", "Cargo", "Salario"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        tblEmpleados.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tblEmpleados))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tblEmpleados, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 51, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void txtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalarioActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+                                                  
+    try {
+        // <<< 6. CREA UN OBJETO EMPLEADO
+        
+        Empleado e = new Empleado();
+        e.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        e.setNombre(txtNombre.getText());
+        e.setApellido(txtApellido.getText());
+        e.setCargo(txtCargo.getText());
+        e.setSalario(Double.parseDouble(txtSalario.getText()));
+
+        // <<< 7. LLAMA A LA LÓGICA DE REGISTRAR
+        logica.registrarEmpleado(e); // (Tendrás que crear este método)
+
+        JOptionPane.showMessageDialog(this, "Empleado guardado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        cargarTabla();
+        limpiarCampos();
+        
+
+        // Mensaje temporal mientras no hay lógica
+        JOptionPane.showMessageDialog(this, "Función 'Guardar' aún no conectada.");
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El salario debe ser un número válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Validación", JOptionPane.WARNING_MESSAGE);
+    }
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+                                                 
+    if (this.idSeleccionado == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un empleado de la tabla.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        // <<< 8. CREA UN OBJETO EMPLEADO CON ID
+        
+        Empleado e = new Empleado();
+        e.setId(this.idSeleccionado); // EL ID DE MONGO
+        e.setCodigo(Integer.parseInt(txtCodigo.getText()));
+        e.setNombre(txtNombre.getText());
+        e.setApellido(txtApellido.getText());
+        e.setCargo(txtCargo.getText());
+        e.setSalario(Double.parseDouble(txtSalario.getText()));
+
+        // <<< 9. LLAMA A LA LÓGICA DE ACTUALIZAR
+        logica.actualizarEmpleado(e); // (Tendrás que crear este método)
+
+        JOptionPane.showMessageDialog(this, "Empleado actualizado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+        cargarTabla();
+        limpiarCampos();
+        
+
+        // Mensaje temporal mientras no hay lógica
+        JOptionPane.showMessageDialog(this, "Función 'Editar' aún no conectada.");
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El salario debe ser un número válido.", "Error de Formato", JOptionPane.ERROR_MESSAGE);
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Validación", JOptionPane.WARNING_MESSAGE);
+    }
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+                                                 
+    if (this.idSeleccionado == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un empleado de la tabla.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea eliminar este empleado?", "Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        // <<< 10. LLAMA A LA LÓGICA DE ELIMINAR
+         logica.eliminarEmpleado(this.idSeleccionado); // (Tendrás que crear este método)
+
+        JOptionPane.showMessageDialog(this, "Empleado eliminado.");
+        cargarTabla();
+         limpiarCampos();
+
+        // Mensaje temporal mientras no hay lógica
+        JOptionPane.showMessageDialog(this, "Función 'Eliminar' aún no conectada.");
+        limpiarCampos();
+    }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_LimpiarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       int fila = jTable1.getSelectedRow(); // <--- Usa jTable1
+    if (fila == -1) return;
+
+    this.idSeleccionado = jTable1.getValueAt(fila, 0).toString();                                          
+   
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void tblEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadosMouseClicked
+         
+    }//GEN-LAST:event_tblEmpleadosMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +414,22 @@ public class FormGestionEmpleados extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Limpiar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane tblEmpleados;
+    private javax.swing.JLabel txtApel;
+    private javax.swing.JTextField txtApellido;
+    private javax.swing.JLabel txtCar;
+    private javax.swing.JTextField txtCargo;
+    private javax.swing.JLabel txtCod;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JLabel txtNom;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JLabel txtSala;
+    private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
 }

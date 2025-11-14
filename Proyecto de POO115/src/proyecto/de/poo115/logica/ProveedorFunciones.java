@@ -1,6 +1,6 @@
 package proyecto.de.poo115.logica;
 
-import proyecto.de.poo115.conección.dao.ProveedorDAO;
+import proyecto.de.poo115.dao.ProveedorDAO;
 import proyecto.de.poo115.modelos.Proveedor;
 import java.util.List;
 

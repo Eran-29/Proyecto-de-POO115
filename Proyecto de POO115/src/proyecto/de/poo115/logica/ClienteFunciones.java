@@ -1,7 +1,7 @@
 
 package proyecto.de.poo115.logica;
 
-import proyecto.de.poo115.conección.dao.ClienteDAO;
+import proyecto.de.poo115.dao.ClienteDAO;
 import proyecto.de.poo115.modelos.Cliente;
 import java.util.List;
 import java.util.regex.Pattern; // Para validar email
@@ -154,5 +154,9 @@ public class ClienteFunciones {
         }
         
         dao.actualizar(c);
+    }
+
+    public void editarCliente(Cliente c) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

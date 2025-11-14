@@ -1,6 +1,6 @@
 
 package proyecto.de.poo115.logica;
-import proyecto.de.poo115.conección.dao.VehiculoDAO;
+import proyecto.de.poo115.dao.VehiculoDAO;
 import proyecto.de.poo115.modelos.Vehiculo;
 import java.util.List;
 

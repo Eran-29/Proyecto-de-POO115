@@ -1,6 +1,6 @@
 package proyecto.de.poo115.logica;
 
-import proyecto.de.poo115.conección.dao.EmpleadoDAO;
+import proyecto.de.poo115.dao.EmpleadoDAO;
 import proyecto.de.poo115.modelos.Empleado;
 import java.util.List;
 

@@ -1,20 +1,58 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package proyecto.de.poo115.ui;
 
-/**
- *
- * @author erick
- */
+ import proyecto.de.poo115.dao.AlquilerDAO;
+ import proyecto.de.poo115.logica.AlquilerFunciones;
+ import proyecto.de.poo115.modelos.Alquiler;
+import java.util.Date; // Para las fechas
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class FormGestionAlquileres extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormGestionAlquileres
-     */
+     private final AlquilerDAO dao;
+     private final AlquilerFunciones logica;
+    private String idAlquilerSeleccionado;
+    private Object totalCalculado;
+    
     public FormGestionAlquileres() {
         initComponents();
+        
+        // Pega esto:
+        this.setLocationRelativeTo(null); 
+        this.dao = new AlquilerDAO();
+        this.logica = new AlquilerFunciones(this.dao); // AlquilerFunciones será complejo
+        cargarTabla();
+    }
+    private void cargarTabla() {
+       DefaultTableModel modeloTabla = (DefaultTableModel) jTable1.getModel();
+        modeloTabla.setRowCount(0);
+
+        // <<< 4. LLAMA A LA LÓGICA
+         List<Alquiler> alquileres = logica.obtenerTodos();
+        
+        // <<< 5. RECORRE LA LISTA
+         for (Alquiler a : alquileres) {
+            Object[] fila = {
+                a.getId(), // MongoID
+                a.getIdCliente(),
+                a.getIdVehiculo(),
+                a.getFechaInicio(),
+                a.getFechaFin(),
+                a.getTotalPagar(),
+                a.isActivo() ? "Activo" : "Finalizado"
+            };
+            modeloTabla.addRow(fila);
+        }
+        
+
+        // Ocultar Columna MongoID
+        // Ocultar Columna MongoID
+jTable1.getColumnModel().getColumn(0).setMaxWidth(0);
+jTable1.getColumnModel().getColumn(0).setMinWidth(0);
+jTable1.getTableHeader().getColumnModel().getColumn(0).setMaxWidth(0);
+jTable1.getTableHeader().getColumnModel().getColumn(0).setMinWidth(0);
     }
 
     /**
@@ -26,21 +64,280 @@ public class FormGestionAlquileres extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtIdCliente = new javax.swing.JTextField();
+        txtIdVehiculo = new javax.swing.JTextField();
+        txtIdEmpleado = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
+        spinFechaInicio = new javax.swing.JSpinner();
+        spinFechaFin = new javax.swing.JSpinner();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        tblAlquileres = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos de Alquiler"));
+
+        jLabel1.setText("ID Cliente:");
+
+        jLabel2.setText("ID Vehículo:");
+
+        jLabel3.setText("ID Empleado:");
+
+        jLabel4.setText("Fecha Inicio:");
+
+        jLabel5.setText("Fecha Fin:");
+
+        jLabel6.setText("Total:");
+
+        txtTotal.setEditable(false);
+        txtTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTotalActionPerformed(evt);
+            }
+        });
+
+        spinFechaInicio.setModel(new javax.swing.SpinnerDateModel());
+
+        spinFechaFin.setModel(new javax.swing.SpinnerDateModel());
+
+        jButton1.setText("Registrar Alquiler");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Finalizar Alquiler");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE))))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(7, 7, 7)
+                                .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIdVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spinFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(spinFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jButton1)
+                        .addGap(66, 66, 66)
+                        .addComponent(jButton2)))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtIdVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtIdEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(spinFechaInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(spinFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(43, 43, 43)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addContainerGap(53, Short.MAX_VALUE))
+        );
+
+        tblAlquileres.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblAlquileresMouseClicked(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "MongoID", "ID Cliente", "ID Vehiculo", "Fecha inicio", "Fecha final", "Total", "Estado"
+            }
+        ));
+        tblAlquileres.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(tblAlquileres))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 135, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(tblAlquileres, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+                                                   
+    try {
+        // <<< 6. RECOGER DATOS
+        String idCliente = txtIdCliente.getText();
+        String idVehiculo = txtIdVehiculo.getText();
+        String idEmpleado = txtIdEmpleado.getText();
+        Date fechaInicio = (Date) spinFechaInicio.getValue();
+        Date fechaFin = (Date) spinFechaFin.getValue();
+
+        // <<< 7. CREAR OBJETO ALQUILER
+        
+        Alquiler a = new Alquiler();
+        a.setIdCliente(idCliente);
+        a.setIdVehiculo(idVehiculo);
+        a.setIdEmpleado(idEmpleado);
+        a.setFechaInicio(fechaInicio);
+        a.setFechaFin(fechaFin);
+        a.setActivo(true);
+
+        // <<< 8. LLAMA A LA LÓGICA DE REGISTRAR
+        // Esta lógica debe ser inteligente:
+        // 1. Validar que el cliente y empleado existan.
+        // 2. Validar que el vehículo esté DISPONIBLE.
+        // 3. Calcular el total (dias * precio/dia del vehiculo).
+        // 4. Guardar el alquiler.
+        // 5. CAMBIAR EL ESTADO del vehículo a "Alquilado".
+        logica.registrarAlquiler(a); 
+
+// 2. Ahora que la lógica ha corrido, obtén el total DESDE el objeto 'a'
+double totalCalculado = a.getTotalPagar(); // Asumiendo que tienes un getter
+
+// 3. Muestra el total en la UI
+txtTotal.setText(String.valueOf(totalCalculado));
+JOptionPane.showMessageDialog(this, "Alquiler registrado. Total: $" + totalCalculado, "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        
+
+        //JOptionPane.showMessageDialog(this, "Función 'Registrar Alquiler' aún no conectada.");
+
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error de Validación", JOptionPane.WARNING_MESSAGE);
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void tblAlquileresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAlquileresMouseClicked
+                                           
+                                               
+    // 1. Obtén la fila desde jTable1
+    int fila = jTable1.getSelectedRow(); 
+    if (fila == -1) return;
+
+    // 2. Obtén los valores desde jTable1
+    this.idAlquilerSeleccionado = jTable1.getValueAt(fila, 0).toString(); // MongoID
+
+    // 3. Pon los datos en los campos (usando jTable1)
+    txtIdCliente.setText(jTable1.getValueAt(fila, 1).toString());
+    txtIdVehiculo.setText(jTable1.getValueAt(fila, 2).toString());
+
+    // 4. Falta poner las fechas en los spinners, pero eso es más complejo.
+    // Por ejemplo (requiere conversión):
+    // spinFechaInicio.setValue(jTable1.getValueAt(fila, 3)); 
+    // spinFechaFin.setValue(jTable1.getValueAt(fila, 4));
+
+    txtTotal.setText(jTable1.getValueAt(fila, 5).toString());
+
+
+    }//GEN-LAST:event_tblAlquileresMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+                                                   
+    if (this.idAlquilerSeleccionado == null) {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione un alquiler de la tabla para finalizarlo.", "Error", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    int confirm = JOptionPane.showConfirmDialog(this, "¿Está seguro de que desea finalizar este alquiler?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+    if (confirm == JOptionPane.YES_OPTION) {
+        // <<< 9. LLAMA A LA LÓGICA DE FINALIZAR
+        
+        // Esta lógica debe:
+        // 1. Cambiar el estado "activo" del alquiler a false.
+        // 2. Buscar el vehículo asociado a este alquiler.
+        // 3. CAMBIAR EL ESTADO del vehículo a "Disponible".
+        logica.finalizarAlquiler(this.idAlquilerSeleccionado);
+
+        JOptionPane.showMessageDialog(this, "Alquiler finalizado. El vehículo vuelve a estar disponible.");
+        cargarTabla();
+        this.idAlquilerSeleccionado = null;
+        
+
+        JOptionPane.showMessageDialog(this, "Función 'Finalizar Alquiler' aún no conectada.");
+    }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +375,22 @@ public class FormGestionAlquileres extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JSpinner spinFechaFin;
+    private javax.swing.JSpinner spinFechaInicio;
+    private javax.swing.JScrollPane tblAlquileres;
+    private javax.swing.JTextField txtIdCliente;
+    private javax.swing.JTextField txtIdEmpleado;
+    private javax.swing.JTextField txtIdVehiculo;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

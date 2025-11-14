@@ -46,5 +46,13 @@ public class Cliente {
 
     public String getCorreo() { return correo;}
     public void setCorreo(String correo) { this.correo = correo;}
-    
+
+    public Object getIdCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void setIdCliente(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }
